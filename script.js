@@ -37,6 +37,37 @@ function randomArray(arr) {
 const userArr = [1, 2, 202, 111, 78];
 randomArray(userArr);
 
+//Hard(1)
+const isBalanced = (str) => {
+    brackets = ["{", "(", "[", "]", ")", "}"];
+    userBrackets = [];
+    strArr = str.replace(/\s/g, '').split("");
+    //takes out all the words from the string and leaves only brackets
+    for(i=0; i<strArr.length; i++){
+        if(brackets.includes(strArr[i])) {
+            userBrackets.push(strArr[i]);
+        };
+    };
+
+    let count = [];
+    for (i = 0; i < userBrackets.length; i++) {
+        let char = count[count.length-1];
+        if (userBrackets[i] == "(" || userBrackets[i] == "{" || userBrackets[i] == "[") {
+            count.push(str[i]);
+        } else if ((char == "(" && userBrackets[i] == ")") || (char == "{" && userBrackets[i] == "}") || (char == "[" && userBrackets[i] == "]")) {
+            count.pop();
+        } else {
+            return false;
+        };
+    };
+
+    return count.length ? false : true;
+};
+
+//Tests
+console.log(isBalanced("{hello world}"));
+console.log(isBalanced("{hello world]"));
+
 //Tests
 console.log(anagram("So dark the con of man", "Madonna of the Rocks"));
 console.log(anagram("Things are good", "Dogs eat ants"));
